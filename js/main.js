@@ -446,3 +446,7 @@
     init();
 
 })();
+
+document.querySelector('.navbar-toggle').addEventListener('click', () => {
+    document.body.classList.toggle('menu-open');
+});

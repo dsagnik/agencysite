@@ -441,7 +441,13 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--gradient-overlay);
+
+  /* Orange gradient + dark layer */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.55)),
+    var(--gradient-overlay);
+
   z-index: -1;
 }
 
@@ -1281,4 +1287,825 @@ p {
   max-width: 95%;
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+/* ===============================
+   TESTIMONIALS SECTION
+   =============================== */
+
+/* Make section wider */
+.testimonials-section .container {
+  max-width: 1400px;
+}
+
+/* Better spacing between cards */
+.testimonials-grid {
+  gap: 2.5rem;
+}
+
+/* Make all cards equal height */
+.testimonials-grid .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Expertise Section Icons */
+.expertise-grid i {
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+/* Make grid cleaner */
+.expertise-grid {
+  gap: 2rem;
+}
+
+/* Expertise Grid Responsive */
+.expertise-grid {
+  gap: 2rem;
+}
+
+/* Tablet: 2 per row */
+@media (max-width: 1024px) {
+  .expertise-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: 1 per row */
+@media (max-width: 768px) {
+  .expertise-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   MOBILE FIRST RESPONSIVE UPGRADE
+   Add at bottom of style.css
+   ============================================ */
+
+/* ---------- Base Mobile Defaults ---------- */
+@media (max-width: 480px) {
+
+  /* Container */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Headings */
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  /* Sections */
+  .section {
+    padding: 2.5rem 0;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 80vh;
+  }
+
+  .hero-content {
+    padding: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  /* Buttons */
+  .btn {
+    width: 100%;
+    padding: 0.8rem;
+  }
+
+  .btn-lg {
+    padding: 0.9rem;
+  }
+
+  /* Cards */
+  .card {
+    padding: 1.2rem;
+  }
+
+  /* Grid - force single column */
+  .grid,
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .pricing-grid,
+  .steps-container,
+  .expertise-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* CEO Section */
+  .ceo-card {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  /* Pricing */
+  .pricing-card {
+    padding: 1.5rem;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 3rem 0 1.5rem;
+  }
+
+  .footer-content {
+    gap: 2rem;
+  }
+
+  /* Whatsapp Button */
+  .whatsapp-float {
+    width: 45px;
+    height: 45px;
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .whatsapp-float i {
+    font-size: 1.5rem;
+  }
+
+}
+
+
+/* ---------- Small Tablets ---------- */
+@media (min-width: 481px) and (max-width: 768px) {
+
+  /* Grids */
+  .grid-2,
+  .grid-3,
+  .pricing-grid,
+  .expertise-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Hero */
+  .hero-content {
+    padding: 2rem;
+  }
+
+  /* Buttons */
+  .btn {
+    width: auto;
+  }
+
+}
+
+
+/* ---------- Tablets / Small Laptops ---------- */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .grid-4,
+  .pricing-grid,
+  .expertise-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero {
+    min-height: 90vh;
+  }
+
+}
+
+
+/* ---------- Improve Touch & Scroll ---------- */
+@media (max-width: 768px) {
+
+  /* Remove hover jump on mobile */
+  .card:hover,
+  .btn:hover {
+    transform: none;
+  }
+
+  /* Better tap spacing */
+  .navbar-link {
+    padding: 0.75rem 0;
+  }
+
+  /* Remove side overflow */
+  body {
+    overflow-x: hidden;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .flex-between {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .flex-between>div {
+    text-align: center;
+  }
+
+  .flex-between .btn {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1rem;
+  }
+
+}
+
+/* =====================================
+   MOBILE HERO FIX
+   ===================================== */
+@media (max-width: 768px) {
+
+  /* Reduce hero height */
+  .hero {
+    min-height: 85vh;
+    padding-top: calc(var(--navbar-height) + 1rem);
+    padding-bottom: 2rem;
+  }
+
+  /* Reduce hero content padding */
+  .hero-content {
+    padding: 1.5rem 1rem;
+    max-width: 100%;
+  }
+
+  /* Smaller heading */
+  .hero h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  /* Smaller paragraph */
+  .hero p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Stack buttons nicely */
+  .hero-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  /* Make buttons full width */
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 0.9rem;
+    font-size: 1rem;
+  }
+
+}
+
+/* =====================================
+   MOBILE HERO OVERLAY FIX
+   ===================================== */
+
+@media (max-width: 768px) {
+
+  .hero h1,
+  .hero p {
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 70px;
+    /* slightly smaller navbar on mobile */
+  }
+}
+
+/* =====================================
+   SERVICES PAGE MOBILE FIX
+===================================== */
+@media (max-width: 768px) {
+
+  /* Reduce section height */
+  .section {
+    padding: 2rem 0;
+  }
+
+  /* Reduce card padding */
+  .card {
+    padding: 1rem;
+  }
+
+  /* Reduce margin between sections */
+  .mb-xl {
+    margin-bottom: 1.5rem;
+  }
+
+  .mb-lg {
+    margin-bottom: 1rem;
+  }
+
+  /* Make service blocks tighter */
+  .service-section,
+  .services-section {
+    margin-bottom: 2rem;
+  }
+
+  /* Reduce list spacing */
+  ul li {
+    margin-bottom: 0.3rem !important;
+  }
+
+  /* Fix big buttons */
+  .btn {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  /* Reduce pricing text size */
+  .pricing-price,
+  .service-price {
+    font-size: 1.4rem;
+  }
+
+  /* Reduce hero height on services */
+  .page-hero {
+    min-height: 30vh;
+    padding-top: calc(var(--navbar-height) + 1rem);
+  }
+
+  /* Center service cards */
+  .grid,
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    gap: 1.2rem;
+  }
+
+  /* Remove double cards feeling */
+  .package-card,
+  .service-card {
+    margin-bottom: 1rem;
+  }
+
+}
+
+/* =====================================
+   FORCE MOBILE TO MATCH DESKTOP STYLE
+===================================== */
+@media (max-width: 768px) {
+
+  /* ---------------- NAVBAR ---------------- */
+
+  /* Keep desktop transparent + gradient feel */
+  .navbar {
+    background: transparent !important;
+    height: var(--navbar-height);
+    box-shadow: none;
+  }
+
+  /* When scrolled, behave same as desktop */
+  .navbar.scrolled {
+    background: var(--color-white) !important;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Logo same proportion */
+  .navbar-logo {
+    height: 42px;
+  }
+
+  /* Hamburger stays white */
+  .navbar-toggle span {
+    background: var(--color-white);
+  }
+
+  .navbar.scrolled .navbar-toggle span {
+    background: var(--color-black);
+  }
+
+  /* ---------------- HERO ---------------- */
+
+  /* Full desktop height feeling */
+  .hero {
+    min-height: 100vh !important;
+    padding-top: var(--navbar-height);
+  }
+
+  /* Same overlay as desktop */
+  .hero-overlay {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.55)),
+      var(--gradient-overlay) !important;
+  }
+
+  /* Same content spacing (just smaller) */
+  .hero-content {
+    padding: 2rem 1.5rem;
+    max-width: 90%;
+  }
+
+  /* Heading similar style */
+  .hero h1 {
+    font-size: 2.4rem;
+    line-height: 1.25;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Paragraph same feel */
+  .hero p {
+    font-size: 1.05rem;
+    opacity: 0.95;
+  }
+
+  /* Buttons layout like desktop */
+  .hero-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-buttons .btn {
+    width: auto;
+    min-width: 160px;
+    max-width: none;
+  }
+
+
+  /* ---------------- MENU DROPDOWN ---------------- */
+
+  /* Desktop-style dropdown */
+  .navbar-menu {
+    background: var(--color-white);
+    border-radius: 0;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .navbar-link {
+    font-weight: 500;
+  }
+
+
+  /* ---------------- REMOVE MOBILE OVERRIDES ---------------- */
+
+  /* Cancel heavy mobile shrinking */
+  body {
+    padding-top: 0 !important;
+  }
+
+}
+
+/* =====================================
+   CENTER MOBILE NAV MENU
+===================================== */
+@media (max-width: 768px) {
+
+  .navbar-menu {
+    /* Full screen overlay */
+    position: fixed;
+    inset: 0;
+
+    /* Center content */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* Spacing */
+    gap: 1.8rem;
+
+    /* Background */
+    background: var(--color-white);
+
+    /* Remove old padding */
+    padding: 0;
+
+    /* Smooth animation */
+    transform: translateY(-100%);
+    transition: all 0.4s ease;
+  }
+
+  /* When menu is open */
+  .navbar-menu.active {
+    transform: translateY(0);
+  }
+
+  /* Menu links */
+  .navbar-link {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+
+  /* CTA button in menu */
+  .navbar-cta {
+    margin-top: 1.5rem;
+    width: auto;
+  }
+
+}
+
+/* =====================================
+   MOBILE MENU GLASS / BLUR EFFECT
+===================================== */
+@media (max-width: 768px) {
+
+  .navbar-menu {
+    /* Glass effect */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    /* Slight shadow */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  }
+
+}
+
+/* =====================================
+   MOBILE MENU HEADER FIX
+   Keep navbar visible
+===================================== */
+@media (max-width: 768px) {
+
+  /* Keep navbar on top */
+  .navbar {
+    z-index: 2000;
+  }
+
+  /* Push menu below navbar */
+  .navbar-menu {
+    top: var(--navbar-height);
+    height: calc(100vh - var(--navbar-height));
+    overflow-y: auto;
+  }
+
+  /* Prevent menu from covering header */
+  .navbar-menu.active {
+    margin-top: 0;
+  }
+
+}
+
+/* =====================================
+   MOBILE MENU SPACING FIX
+===================================== */
+@media (max-width: 768px) {
+
+  /* Reduce overall menu padding */
+  .navbar-menu {
+    padding: 1.2rem 1rem;
+    gap: 0.2rem;
+    /* if flex/grid is used */
+  }
+
+  /* Reduce each link spacing */
+  .navbar-menu .navbar-link {
+    padding: 0.5rem 0;
+    /* ↓ vertical space */
+    margin: 0;
+    /* remove margins */
+    line-height: 1.4;
+  }
+
+  /* If list items exist */
+  .navbar-menu li {
+    margin: 0;
+    padding: 0;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .navbar-menu .navbar-link {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .navbar-menu .navbar-link:last-child {
+    border-bottom: none;
+  }
+
+}
+
+/* =====================================
+   FINAL SERVICES MOBILE FIX (DO NOT EDIT)
+===================================== */
+@media (max-width: 768px) {
+
+  /* Reset service grids */
+  #branding .grid-2,
+  #web .grid-2,
+  #marketing .grid-2,
+  #support .grid-2 {
+    display: block !important;
+  }
+
+  /* Reset children */
+  #branding .grid-2>div,
+  #web .grid-2>div,
+  #marketing .grid-2>div,
+  #support .grid-2>div {
+    width: 100% !important;
+    order: initial !important;
+    float: none !important;
+    margin: 0 !important;
+  }
+
+  /* Space between card + text */
+  #branding .grid-2>div:not(:last-child),
+  #web .grid-2>div:not(:last-child),
+  #marketing .grid-2>div:not(:last-child),
+  #support .grid-2>div:not(:last-child) {
+    margin-bottom: 1.5rem !important;
+  }
+
+}
+
+/* =====================================
+   FINAL SERVICES RESPONSIVE FIX
+===================================== */
+
+/* Default: Desktop & Tablet */
+#branding .grid-2,
+#web .grid-2,
+#marketing .grid-2,
+#support .grid-2 {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  align-items: center;
+  gap: 2rem;
+}
+
+
+/* Mobile: Stack card then content */
+@media (max-width: 768px) {
+
+  #branding .grid-2,
+  #web .grid-2,
+  #marketing .grid-2,
+  #support .grid-2 {
+
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    gap: 1.5rem;
+  }
+
+}
+
+/* =====================================
+   CARD INNER SPACING FIX
+===================================== */
+
+.card {
+  padding-top: 2rem;
+  /* More space on top */
+  padding-bottom: 2rem;
+  /* Balance bottom */
+}
+
+/* Center content inside service cards */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Improve spacing for icon */
+.card-icon {
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* =====================================
+   PORTFOLIO PROJECT IMAGES
+===================================== */
+
+.project-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: #000;
+}
+
+/* Project Screenshot */
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+/* Dark Overlay */
+.project-image span {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+
+  transition: background 0.3s ease;
+}
+
+/* Hover Effect */
+.project-image:hover img {
+  transform: scale(1.08);
+}
+
+.project-image:hover span {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Fallback for older browsers */
+@supports not (aspect-ratio: 16 / 9) {
+  .project-image {
+    height: 0;
+    padding-top: 56.25%;
+    /* 16:9 ratio */
+  }
+
+  .project-image img,
+  .project-image span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+  .project-image {
+    height: 180px;
+  }
+
+  .project-image span {
+    font-size: 1.2rem;
+  }
+}
+
+/* Make project cards equal height */
+.grid-3 .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Push button to bottom */
+.grid-3 .card .btn {
+  margin-top: auto;
+}
+
+.project-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+  position: relative;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
