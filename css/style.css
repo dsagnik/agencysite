@@ -2186,3 +2186,107 @@ p {
 .testimonials-grid .card p:last-child {
   grid-row: 4;
 }
+
+/* ================================
+   PREMIUM FOOTER UPGRADE
+================================ */
+
+.footer {
+  position: relative;
+  background: linear-gradient(180deg, #0f0f0f, #1a1a1a);
+  padding: 4rem 0 2rem;
+  overflow: hidden;
+}
+
+/* Gradient Top Line */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: var(--gradient-primary);
+}
+
+/* Subtle Glow Effect */
+.footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left,
+      rgba(255, 140, 0, 0.08),
+      transparent 40%),
+    radial-gradient(circle at bottom right,
+      rgba(128, 0, 0, 0.08),
+      transparent 40%);
+  pointer-events: none;
+}
+
+/* Footer Columns */
+.footer-column h4 {
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+/* Underline for headings */
+.footer-column h4::after {
+  content: "";
+  width: 40px;
+  height: 3px;
+  background: var(--gradient-primary);
+  display: block;
+  margin-top: 6px;
+  border-radius: 10px;
+}
+
+/* Footer Links Hover */
+.footer-link {
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--color-primary);
+  transform: translateX(5px);
+}
+
+/* Social Icons Upgrade */
+.footer-social-link {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-social-link:hover {
+  background: var(--gradient-primary);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 5px 20px rgba(255, 140, 0, 0.4);
+}
+
+/* Footer Tagline */
+.footer-tagline {
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* Divider Line */
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Bottom Text */
+.footer-bottom p {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.footer-bottom a {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
