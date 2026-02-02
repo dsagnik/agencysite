@@ -450,3 +450,16 @@
 document.querySelector('.navbar-toggle').addEventListener('click', () => {
     document.body.classList.toggle('menu-open');
 });
+
+const navbar = document.querySelector(".navbar");
+const logo = document.querySelector(".navbar-logo");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+        logo.src = logo.dataset.colored;
+    } else {
+        navbar.classList.remove("scrolled");
+        logo.src = "assets/images/logo-white.png";
+    }
+});

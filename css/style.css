@@ -2109,3 +2109,80 @@ p {
   height: 100%;
   object-fit: cover;
 }
+
+/* =====================================
+   FINAL TESTIMONIALS ALIGNMENT FIX
+===================================== */
+
+.testimonials-grid {
+  align-items: stretch;
+}
+
+/* Only testimonial cards */
+.testimonials-grid .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.8rem;
+}
+
+/* Video container */
+.testimonials-grid .video-box {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+/* Iframe fit */
+.testimonials-grid .video-box iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Keep spacing consistent */
+.testimonials-grid h4 {
+  margin-top: 0.5rem;
+}
+
+.testimonials-grid p {
+  margin-bottom: 0.8rem;
+}
+
+/* =====================================
+   TESTIMONIALS PERFECT ALIGNMENT
+===================================== */
+
+.testimonials-grid .card {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  height: 100%;
+}
+
+/* Video always same */
+.testimonials-grid .video-box {
+  grid-row: 1;
+}
+
+/* Name */
+.testimonials-grid h4 {
+  grid-row: 2;
+  min-height: 2.2rem;
+  /* reserve space */
+}
+
+/* Role */
+.testimonials-grid .role {
+  grid-row: 3;
+  min-height: 1.6rem;
+}
+
+/* Quote */
+.testimonials-grid .card p:last-child {
+  grid-row: 4;
+}
