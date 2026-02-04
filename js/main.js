@@ -1,5 +1,5 @@
 /* ============================================
-   PREMIUM DIGITAL AGENCY WEBSITE - MAIN JAVASCRIPT
+   SHRIONIK BRANDING AGENCY WEBSITE - MAIN JAVASCRIPT
    ============================================ */
 
 (function () {

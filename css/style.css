@@ -581,7 +581,12 @@ p {
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
   transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  position: relative;
+  overflow: visible;
+  z-index: 1;
 }
 
 .card:hover {
@@ -606,6 +611,7 @@ p {
   font-size: var(--font-size-2xl);
   margin-bottom: var(--spacing-md);
   color: var(--color-black);
+  padding-top: 0.5rem
 }
 
 .card-description {
@@ -647,6 +653,27 @@ p {
 .social-btn:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
+}
+
+.card-title {
+  min-height: 60px;
+}
+
+.card-description {
+  min-height: 70px;
+}
+
+.card .price,
+.card p:last-of-type {
+  margin-top: auto;
+}
+
+.section-subtitle {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: var(--color-gray-dark);
 }
 
 
@@ -736,6 +763,15 @@ p {
   color: var(--color-primary);
   font-size: var(--font-size-lg);
 }
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  margin-top: auto;
+}
+
 
 /* ============================================
    FORMS
@@ -2289,4 +2325,34 @@ p {
 
 .footer-bottom a:hover {
   text-decoration: underline;
+}
+
+/* =====================================
+   FINAL PRICING MOBILE NORMALIZER
+   (Overrides all previous rules)
+===================================== */
+
+@media (max-width: 768px) {
+
+  .pricing-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3rem !important;
+    /* Perfect equal spacing */
+  }
+
+  .pricing-card {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Remove internal random margins */
+  .pricing-card>* {
+    margin-bottom: 0.3rem;
+  }
+
+  .pricing-card>*:last-child {
+    margin-bottom: 0;
+  }
+
 }
