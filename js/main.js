@@ -474,34 +474,45 @@ const yearText = startYear === currentYear
 
 document.getElementById("year-range").textContent = yearText;
 
-// Contact Form → Google Form (Iframe Method)
+// Contact Form → App Script
 document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("contactForm");
-    const successBox = document.getElementById("formSuccess");
+    const box = document.getElementById("formSuccess");
 
-    if (!form || !successBox) {
-        console.error("Form not found");
-        return;
-    }
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    // Set form target to hidden iframe
-    form.setAttribute("target", "hidden_iframe");
-    form.setAttribute(
-        "action",
-        "https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse"
-    );
-    form.setAttribute("method", "POST");
+        box.innerHTML = "⏳ Sending...";
 
-    form.addEventListener("submit", function () {
+        fetch("https://script.google.com/macros/s/AKfycbyIPFSm27CsLXyqsGfVKxOFbv-SP_vqQFvP8jROqdrSy7PjyPmkQNl15e5gQb19wQUA/exec", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: form.name.value,
+                email: form.email.value,
+                phone: form.phone.value,
+                service: form.service.value,
+                budget: form.budget.value,
+                message: form.message.value
+            })
+        })
+            .then(r => r.json())
+            .then(res => {
 
-        successBox.innerHTML = "⏳ Sending...";
+                if (res.success) {
+                    box.innerHTML = "✅ Thanks! Message sent!";
+                    form.reset();
+                } else {
+                    throw "Fail";
+                }
 
-        setTimeout(function () {
-            successBox.innerHTML =
-                "✅ Thanks! Your message sent successfully!";
-            form.reset();
-        }, 1000);
+            })
+            .catch(() => {
+                box.innerHTML = "❌ Failed. Try again.";
+            });
     });
 
 });
