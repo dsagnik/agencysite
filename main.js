@@ -475,22 +475,19 @@ const yearText = startYear === currentYear
 document.getElementById("year-range").textContent = yearText;
 
 <script>
-/* ===== GOOGLE FORM SUBMISSION FIXED ===== */
+/* ===== GOOGLE FORM SUBMISSION (STABLE VERSION) ===== */
 
     document.addEventListener("DOMContentLoaded", function () {
 
   const contactForm = document.getElementById("contactForm");
+    const formMsg = document.getElementById("formSuccess");
 
-    if (!contactForm) {
-        console.error("Contact form not found");
-    return;
-  }
+    if (!contactForm || !formMsg) return;
 
     contactForm.addEventListener("submit", function (e) {
 
         e.preventDefault();
 
-    // Fields
     const name = document.getElementById("name");
     const email = document.getElementById("email");
     const phone = document.getElementById("phone");
@@ -498,14 +495,9 @@ document.getElementById("year-range").textContent = yearText;
     const budget = document.getElementById("budget");
     const message = document.getElementById("message");
 
-    if (!name || !email || !message) {
-        alert("Form fields missing");
-    return;
-    }
-
-    // Form Data
     const formData = new FormData();
 
+    // Google Form Entry IDs
     formData.append("entry.191507138", name.value);
     formData.append("entry.219472196", email.value);
     formData.append("entry.1352502707", phone.value);
@@ -513,56 +505,42 @@ document.getElementById("year-range").textContent = yearText;
     formData.append("entry.1362729948", budget.value);
     formData.append("entry.1039998442", message.value);
 
-    // Button
     const submitBtn = contactForm.querySelector("button");
+
     submitBtn.disabled = true;
-    submitBtn.innerHTML = "Sending...";
+    submitBtn.innerText = "Sending...";
 
-    // ✅ IMPORTANT: Replace with YOUR real formResponse URL
-    const googleFormURL =
-    "https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse";
-
-    fetch(googleFormURL, {
+    fetch(
+    "https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse",
+    {
         method: "POST",
     mode: "no-cors",
     body: formData
-    }).then(() => {
+      }
+    ).then(() => {
 
-      // Remove old message if exists
-      const oldMsg = document.getElementById("formSuccess");
-    if (oldMsg) oldMsg.remove();
+        // Show success
+        formMsg.innerHTML = "✅ Thank you! We will contact you soon.";
+    formMsg.style.display = "block";
 
-    // Success message
-    const success = document.createElement("div");
-    success.id = "formSuccess";
-
-    success.innerHTML = "✅ Thank you! We will contact you soon.";
-    success.style.marginTop = "1rem";
-    success.style.padding = "14px";
-    success.style.background = "#e8fff3";
-    success.style.color = "#0f5132";
-    success.style.borderRadius = "6px";
-    success.style.textAlign = "center";
-    success.style.fontWeight = "600";
-
-    contactForm.appendChild(success);
-
-    // Reset
     contactForm.reset();
 
-    // Restore button
     submitBtn.disabled = false;
     submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
 
-      // Auto remove
+      // Hide after 6 sec
       setTimeout(() => {
-        success.remove();
+        formMsg.style.display = "none";
       }, 6000);
 
-    }).catch(err => {
-        console.error("Submit error:", err);
-    alert("Submission failed. Try again.");
+    }).catch(() => {
+
+        formMsg.innerHTML = "❌ Submission failed. Try again.";
+    formMsg.style.display = "block";
+
     submitBtn.disabled = false;
+    submitBtn.innerText = "Send Message";
+
     });
 
   });
