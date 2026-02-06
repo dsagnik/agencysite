@@ -269,34 +269,27 @@ const yearText = startYear === currentYear
 
 document.getElementById("year-range").textContent = yearText;
 
-// ===== SHRIONIK CONTACT FORM (GOOGLE FORM) =====
+// ===== GOOGLE FORM SUBMISSION =====
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const contactForm = document.getElementById("contactForm");
-    const formMessage = document.getElementById("formSuccess");
+    const form = document.getElementById("contactForm");
+    const msg = document.getElementById("formSuccess");
 
-    if (!contactForm || !formMessage) return;
+    if (!form || !msg) return;
 
-    contactForm.addEventListener("submit", function (e) {
-        e.preventDefault(); // Stop normal submit
-
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const phone = document.getElementById("phone").value;
-        const service = document.getElementById("service").value;
-        const budget = document.getElementById("budget").value;
-        const message = document.getElementById("message").value;
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
         const formData = new FormData();
 
-        // ✅ Your new form Entry IDs
-        formData.append("entry.1258596235", name);
-        formData.append("entry.1828468078", email);
-        formData.append("entry.1888240649", phone);
-        formData.append("entry.145772532", service);
-        formData.append("entry.1549220321", budget);
-        formData.append("entry.1048185499", message);
+        // ✅ YOUR REAL ENTRY IDs
+        formData.append("entry.1258596235", document.getElementById("name").value);
+        formData.append("entry.1828468078", document.getElementById("email").value);
+        formData.append("entry.1888240649", document.getElementById("phone").value);
+        formData.append("entry.145772532", document.getElementById("service").value);
+        formData.append("entry.1549220321", document.getElementById("budget").value);
+        formData.append("entry.1048185499", document.getElementById("message").value);
 
         fetch(
             "https://docs.google.com/forms/d/e/1FAIpQLSe2xuc9JV1UIJBXKFolCMWsMuf6vrhbtF_uXxbbV1c1MhDJ4Q/formResponse",
@@ -307,14 +300,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
-        // Success message
-        formMessage.textContent =
-            "✅ Thank you! Your message has been sent successfully!";
-        formMessage.style.color = "green";
-        formMessage.style.display = "block";
-        formMessage.style.marginTop = "15px";
+        msg.innerHTML = "✅ Thank you! Message sent successfully.";
+        msg.style.color = "green";
 
-        contactForm.reset();
+        form.reset();
     });
 
 });
