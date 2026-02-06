@@ -436,11 +436,12 @@
         initMobileMenu();
         initSmoothScroll();
         initWhatsAppButton();
-        initFormValidation();
-        initNewsletterForm();
+        // initFormValidation();   // DISABLED
+        // initNewsletterForm();  // DISABLED
         initActivePageHighlight();
         initScrollAnimations();
     }
+
 
     // Start initialization
     init();
@@ -474,21 +475,3 @@ const yearText = startYear === currentYear
 
 document.getElementById("year-range").textContent = yearText;
 
-// Contact Form → App Script
-document.addEventListener("DOMContentLoaded", function () {
-
-    const form = document.getElementById("contactForm");
-    const box = document.getElementById("formSuccess");
-
-    form.addEventListener("submit", function () {
-
-        box.innerHTML = "⏳ Sending...";
-
-        setTimeout(function () {
-            box.innerHTML = "✅ Thanks! Your message sent successfully!";
-            form.reset();
-        }, 1200);
-
-    });
-
-});
