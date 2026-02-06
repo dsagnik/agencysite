@@ -269,45 +269,38 @@ const yearText = startYear === currentYear
 
 document.getElementById("year-range").textContent = yearText;
 
-// ===== CONTACT FORM (GOOGLE FORM SUBMISSION) =====
+// ===== SHRIONIK CONTACT FORM → GOOGLE FORM =====
 
-const contactForm = document.getElementById("contactForm");
-const formMessage = document.getElementById("formSuccess");
+document.addEventListener("DOMContentLoaded", function () {
 
-if (contactForm && formMessage) {
+    const form = document.getElementById("contactForm");
+    const msg = document.getElementById("formSuccess");
 
-    contactForm.addEventListener("submit", function (e) {
+    if (!form || !msg) return;
 
-        e.preventDefault(); // stop page reload
+    form.addEventListener("submit", function (e) {
 
-        const name = document.getElementById("name");
-        const email = document.getElementById("email");
-        const phone = document.getElementById("phone");
-        const service = document.getElementById("service");
-        const budget = document.getElementById("budget");
-        const message = document.getElementById("message");
+        e.preventDefault(); // stop reload
 
-        if (!name || !email || !phone || !service || !budget || !message) {
-            console.error("Missing form fields");
-            return;
-        }
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const service = document.getElementById("service").value;
+        const budget = document.getElementById("budget").value;
+        const message = document.getElementById("message").value;
 
         const formData = new FormData();
 
-        // Google Form Entry IDs
-        formData.append("entry.191507138", name.value);
-        formData.append("entry.219472196", email.value);
-        formData.append("entry.1352502707", phone.value);
-        formData.append("entry.1362729948", service.value);
-        formData.append("entry.1039998442", budget.value);
-        formData.append("entry.177055249", message.value);
+        // ✅ Correct Entry IDs (Your New Form)
+        formData.append("entry.1258596235", name);
+        formData.append("entry.1828468078", email);
+        formData.append("entry.1888240649", phone);
+        formData.append("entry.145772532", service);
+        formData.append("entry.1549220321", budget);
+        formData.append("entry.1048185499", message);
 
-        const submitBtn = contactForm.querySelector("button[type='submit']");
-        if (submitBtn) submitBtn.disabled = true;
-
-        // Send to Google Form (same as Kanishk)
         fetch(
-            "https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse",
+            "https://docs.google.com/forms/d/e/1FAIpQLSe2xuc9JV1UIJBXKFolCMWsMuf6vrhbtF_uXxbbV1c1MhDJ4Q/formResponse",
             {
                 method: "POST",
                 mode: "no-cors",
@@ -315,19 +308,13 @@ if (contactForm && formMessage) {
             }
         );
 
-        // Success message
-        formMessage.textContent =
-            "Thank you for your message! We will get back to you soon.";
+        // Success UI
+        msg.innerHTML = "✅ Thank you! Your message has been sent.";
+        msg.style.display = "block";
+        msg.style.marginTop = "15px";
 
-        formMessage.className = "form-message success";
-        formMessage.style.display = "block";
-        formMessage.style.marginTop = "20px";
-        formMessage.style.padding = "14px 18px";
-
-        contactForm.reset();
-
-        if (submitBtn) submitBtn.disabled = false;
+        form.reset();
 
     });
 
-}
+});
