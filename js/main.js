@@ -292,3 +292,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+// ===== CONTACT FORM CONFIRMATION =====
+
+let contactSubmitted = false;
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const success = document.getElementById("contactSuccess");
+
+    window.addEventListener("load", function () {
+        if (contactSubmitted) {
+            success.style.display = "block";
+        }
+    });
+
+});
