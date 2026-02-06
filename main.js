@@ -475,79 +475,97 @@ const yearText = startYear === currentYear
 document.getElementById("year-range").textContent = yearText;
 
 <script>
-/* ===== GOOGLE FORM EMBED SUBMISSION ===== */
+/* ===== GOOGLE FORM SUBMISSION FIXED ===== */
 
-    const contactForm = document.getElementById("contactForm");
+    document.addEventListener("DOMContentLoaded", function () {
 
-    if (contactForm) {
+  const contactForm = document.getElementById("contactForm");
 
-        contactForm.addEventListener("submit", function (e) {
+    if (!contactForm) {
+        console.error("Contact form not found");
+    return;
+  }
 
-            e.preventDefault(); // Stop normal submit
+    contactForm.addEventListener("submit", function (e) {
 
-            // Get fields
-            const name = document.getElementById("name");
-            const email = document.getElementById("email");
-            const phone = document.getElementById("phone");
-            const service = document.getElementById("service");
-            const budget = document.getElementById("budget");
-            const message = document.getElementById("message");
+        e.preventDefault();
 
-            // Create form data
-            const formData = new FormData();
+    // Fields
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const service = document.getElementById("service");
+    const budget = document.getElementById("budget");
+    const message = document.getElementById("message");
 
-            // Append Google Form Entry IDs
-            formData.append("entry.191507138", name.value);
-            formData.append("entry.219472196", email.value);
-            formData.append("entry.1352502707", phone.value);
-            formData.append("entry.177055249", service.value);
-            formData.append("entry.1362729948", budget.value);
-            formData.append("entry.1039998442", message.value);
+    if (!name || !email || !message) {
+        alert("Form fields missing");
+    return;
+    }
 
-            // Disable button
-            const submitBtn = contactForm.querySelector("button");
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Sending...";
+    // Form Data
+    const formData = new FormData();
 
-            // Send to Google Form
-            fetch(
-                "https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse",
-                {
-                    method: "POST",
-                    mode: "no-cors",
-                    body: formData
-                }
-            ).then(() => {
+    formData.append("entry.191507138", name.value);
+    formData.append("entry.219472196", email.value);
+    formData.append("entry.1352502707", phone.value);
+    formData.append("entry.177055249", service.value);
+    formData.append("entry.1362729948", budget.value);
+    formData.append("entry.1039998442", message.value);
 
-                // Success message
-                const successMsg = document.createElement("div");
+    // Button
+    const submitBtn = contactForm.querySelector("button");
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = "Sending...";
 
-                successMsg.innerHTML = "✅ Thank you! Your enquiry has been submitted.";
-                successMsg.style.marginTop = "1rem";
-                successMsg.style.padding = "12px";
-                successMsg.style.background = "#e8fff3";
-                successMsg.style.color = "#0f5132";
-                successMsg.style.borderRadius = "6px";
-                successMsg.style.textAlign = "center";
-                successMsg.style.fontWeight = "600";
+    // ✅ IMPORTANT: Replace with YOUR real formResponse URL
+    const googleFormURL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse";
 
-                contactForm.appendChild(successMsg);
+    fetch(googleFormURL, {
+        method: "POST",
+    mode: "no-cors",
+    body: formData
+    }).then(() => {
 
-                // Reset form
-                contactForm.reset();
+      // Remove old message if exists
+      const oldMsg = document.getElementById("formSuccess");
+    if (oldMsg) oldMsg.remove();
 
-                // Restore button
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Send Message";
+    // Success message
+    const success = document.createElement("div");
+    success.id = "formSuccess";
 
-                // Remove message after 5 sec
-                setTimeout(() => {
-                    successMsg.remove();
-                }, 5000);
+    success.innerHTML = "✅ Thank you! We will contact you soon.";
+    success.style.marginTop = "1rem";
+    success.style.padding = "14px";
+    success.style.background = "#e8fff3";
+    success.style.color = "#0f5132";
+    success.style.borderRadius = "6px";
+    success.style.textAlign = "center";
+    success.style.fontWeight = "600";
 
-            });
+    contactForm.appendChild(success);
 
-        });
+    // Reset
+    contactForm.reset();
 
-}
+    // Restore button
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+
+      // Auto remove
+      setTimeout(() => {
+        success.remove();
+      }, 6000);
+
+    }).catch(err => {
+        console.error("Submit error:", err);
+    alert("Submission failed. Try again.");
+    submitBtn.disabled = false;
+    });
+
+  });
+
+});
 </script>
