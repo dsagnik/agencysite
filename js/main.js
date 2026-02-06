@@ -474,41 +474,45 @@ const yearText = startYear === currentYear
 
 document.getElementById("year-range").textContent = yearText;
 
-// Contact Form
+
+// Contact Form - Google Form Integration
 document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("contactForm");
+    const successBox = document.getElementById("formSuccess");
 
-    if (!form) {
-        console.error("contactForm not found!");
+    if (!form || !successBox) {
+        console.error("Form or success box not found");
         return;
     }
 
+    // Remove any previous handlers
+    form.onsubmit = null;
+
     form.addEventListener("submit", function (e) {
         e.preventDefault();
+        e.stopPropagation(); // stop double submit
+
+        successBox.innerHTML = "⏳ Sending...";
 
         const formData = new FormData();
 
-        // Map your form fields to Google Form entry IDs
+        // Correct Entry IDs
         formData.append("entry.191507138", form.name.value);
         formData.append("entry.219472196", form.email.value);
         formData.append("entry.1352502707", form.phone.value);
-        formData.append("entry.177055249", form.service.value);
-        formData.append("entry.1362729948", form.budget.value);
-        formData.append("entry.1039998442", form.message.value);
+        formData.append("entry.1362729948", form.service.value);
+        formData.append("entry.1039998442", form.budget.value);
+        formData.append("entry.177055249", form.message.value);
 
         fetch("https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse", {
             method: "POST",
-            mode: "no-cors",
-            body: formData
+            body: formData,
+            mode: "no-cors"
         });
 
-        document.getElementById("formSuccess").innerHTML =
-            "✅ Thanks! Your message sent successfully!";
-
+        successBox.innerHTML = "✅ Thanks! Your message sent successfully!";
         form.reset();
     });
 
 });
-
-
