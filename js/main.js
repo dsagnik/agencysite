@@ -480,39 +480,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("contactForm");
     const box = document.getElementById("formSuccess");
 
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
+    form.addEventListener("submit", function () {
 
         box.innerHTML = "⏳ Sending...";
 
-        fetch("https://script.google.com/macros/s/AKfycbyIPFSm27CsLXyqsGfVKxOFbv-SP_vqQFvP8jROqdrSy7PjyPmkQNl15e5gQb19wQUA/exec", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: form.name.value,
-                email: form.email.value,
-                phone: form.phone.value,
-                service: form.service.value,
-                budget: form.budget.value,
-                message: form.message.value
-            })
-        })
-            .then(r => r.json())
-            .then(res => {
+        setTimeout(function () {
+            box.innerHTML = "✅ Thanks! Your message sent successfully!";
+            form.reset();
+        }, 1200);
 
-                if (res.success) {
-                    box.innerHTML = "✅ Thanks! Message sent!";
-                    form.reset();
-                } else {
-                    throw "Fail";
-                }
-
-            })
-            .catch(() => {
-                box.innerHTML = "❌ Failed. Try again.";
-            });
     });
 
 });
