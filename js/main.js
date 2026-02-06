@@ -269,41 +269,26 @@ const yearText = startYear === currentYear
 
 document.getElementById("year-range").textContent = yearText;
 
-// ===== GOOGLE FORM SUBMISSION =====
+// ===============================
+// NEWSLETTER SUCCESS MESSAGE
+// ===============================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const form = document.getElementById("contactForm");
-    const msg = document.getElementById("formSuccess");
+    const form = document.querySelector(".newsletter-form");
+    const msg = document.getElementById("newsletterSuccess");
 
     if (!form || !msg) return;
 
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
+    form.addEventListener("submit", function () {
 
-        const formData = new FormData();
+        // Show success after Google Form submits
+        setTimeout(function () {
+            msg.style.display = "block";
+            msg.innerText = "✅ Thank you for subscribing!";
+            form.reset();
+        }, 800);
 
-        // ✅ YOUR REAL ENTRY IDs
-        formData.append("entry.1258596235", document.getElementById("name").value);
-        formData.append("entry.1828468078", document.getElementById("email").value);
-        formData.append("entry.1888240649", document.getElementById("phone").value);
-        formData.append("entry.1048185499", document.getElementById("message").value);
-        formData.append("entry.145772532", document.getElementById("service").value);
-        formData.append("entry.1549220321", document.getElementById("budget").value);
-
-        fetch(
-            "https://docs.google.com/forms/d/e/1FAIpQLSe2xuc9JV1UIJBXKFolCMWsMuf6vrhbtF_uXxbbV1c1MhDJ4Q/formResponse",
-            {
-                method: "POST",
-                mode: "no-cors",
-                body: formData
-            }
-        );
-
-        msg.innerHTML = "✅ Thank you! Message sent successfully.";
-        msg.style.color = "green";
-
-        form.reset();
     });
 
 });
