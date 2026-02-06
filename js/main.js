@@ -475,17 +475,18 @@ const yearText = startYear === currentYear
 document.getElementById("year-range").textContent = yearText;
 
 
-// Contact Form - Apps Script Integration
+// Contact Form → Google Form Integration
 document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("contactForm");
     const successBox = document.getElementById("formSuccess");
 
     if (!form || !successBox) {
-        console.error("Form or success box not found");
+        console.error("Contact form not found");
         return;
     }
 
+    // Prevent any old handlers
     form.onsubmit = null;
 
     form.addEventListener("submit", function (e) {
@@ -494,38 +495,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
         successBox.innerHTML = "⏳ Sending...";
 
-        fetch("https://script.google.com/macros/s/AKfycbyGVAYygpMEzlsD3zlbwua6864UDVNcLcpGovPN1RT1w-qrNPLy299ObtLPMG4tnfQ-6g/exec", {
+        // Create FormData for Google Form
+        const formData = new FormData();
+
+        // Your verified Entry IDs
+        formData.append("entry.191507138", form.name.value);
+        formData.append("entry.219472196", form.email.value);
+        formData.append("entry.1352502707", form.phone.value);
+        formData.append("entry.1362729948", form.service.value);
+        formData.append("entry.1039998442", form.budget.value);
+        formData.append("entry.177055249", form.message.value);
+
+        // Submit to Google Form
+        fetch("https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: form.name.value,
-                email: form.email.value,
-                phone: form.phone.value,
-                service: form.service.value,
-                budget: form.budget.value,
-                message: form.message.value
-            })
-        })
-            .then(res => res.json())
-            .then(data => {
+            body: formData,
+            mode: "no-cors"
+        });
 
-                if (data.status === "success") {
-                    successBox.innerHTML = "✅ Thanks! Your message sent successfully!";
-                    form.reset();
-                } else {
-                    throw new Error("Server error");
-                }
-
-            })
-            .catch(err => {
-
-                console.error(err);
-                successBox.innerHTML = "❌ Failed to send. Try again.";
-
-            });
-
+        // Show success (Google doesn't return response in no-cors)
+        successBox.innerHTML = "✅ Thanks! Your message sent successfully!";
+        form.reset();
     });
 
 });
