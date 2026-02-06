@@ -475,14 +475,79 @@ const yearText = startYear === currentYear
 document.getElementById("year-range").textContent = yearText;
 
 <script>
-    let submitted = false;
+/* ===== GOOGLE FORM EMBED SUBMISSION ===== */
 
-    document.querySelector("form").addEventListener("submit", function () {
-        submitted = true;
+    const contactForm = document.getElementById("contactForm");
 
-    setTimeout(() => {
-        alert("Thank you! Your message has been sent.");
-    this.reset();
-    }, 1000);
-  });
+    if (contactForm) {
+
+        contactForm.addEventListener("submit", function (e) {
+
+            e.preventDefault(); // Stop normal submit
+
+            // Get fields
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const phone = document.getElementById("phone");
+            const service = document.getElementById("service");
+            const budget = document.getElementById("budget");
+            const message = document.getElementById("message");
+
+            // Create form data
+            const formData = new FormData();
+
+            // Append Google Form Entry IDs
+            formData.append("entry.191507138", name.value);
+            formData.append("entry.219472196", email.value);
+            formData.append("entry.1352502707", phone.value);
+            formData.append("entry.177055249", service.value);
+            formData.append("entry.1362729948", budget.value);
+            formData.append("entry.1039998442", message.value);
+
+            // Disable button
+            const submitBtn = contactForm.querySelector("button");
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Sending...";
+
+            // Send to Google Form
+            fetch(
+                "https://forms.gle/xa4ZhaWxRUEpRb927",
+                {
+                    method: "POST",
+                    mode: "no-cors",
+                    body: formData
+                }
+            ).then(() => {
+
+                // Success message
+                const successMsg = document.createElement("div");
+
+                successMsg.innerHTML = "✅ Thank you! Your enquiry has been submitted.";
+                successMsg.style.marginTop = "1rem";
+                successMsg.style.padding = "12px";
+                successMsg.style.background = "#e8fff3";
+                successMsg.style.color = "#0f5132";
+                successMsg.style.borderRadius = "6px";
+                successMsg.style.textAlign = "center";
+                successMsg.style.fontWeight = "600";
+
+                contactForm.appendChild(successMsg);
+
+                // Reset form
+                contactForm.reset();
+
+                // Restore button
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Send Message";
+
+                // Remove message after 5 sec
+                setTimeout(() => {
+                    successMsg.remove();
+                }, 5000);
+
+            });
+
+        });
+
+}
 </script>
