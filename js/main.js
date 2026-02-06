@@ -474,48 +474,34 @@ const yearText = startYear === currentYear
 
 document.getElementById("year-range").textContent = yearText;
 
-
-// Contact Form → Google Form Integration
+// Contact Form → Google Form (Iframe Method)
 document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("contactForm");
     const successBox = document.getElementById("formSuccess");
 
     if (!form || !successBox) {
-        console.error("Contact form not found");
+        console.error("Form not found");
         return;
     }
 
-    // Prevent any old handlers
-    form.onsubmit = null;
+    // Set form target to hidden iframe
+    form.setAttribute("target", "hidden_iframe");
+    form.setAttribute(
+        "action",
+        "https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse"
+    );
+    form.setAttribute("method", "POST");
 
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    form.addEventListener("submit", function () {
 
         successBox.innerHTML = "⏳ Sending...";
 
-        // Create FormData for Google Form
-        const formData = new FormData();
-
-        // Your verified Entry IDs
-        formData.append("entry.191507138", form.name.value);
-        formData.append("entry.219472196", form.email.value);
-        formData.append("entry.1352502707", form.phone.value);
-        formData.append("entry.1362729948", form.service.value);
-        formData.append("entry.1039998442", form.budget.value);
-        formData.append("entry.177055249", form.message.value);
-
-        // Submit to Google Form
-        fetch("https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse", {
-            method: "POST",
-            body: formData,
-            mode: "no-cors"
-        });
-
-        // Show success (Google doesn't return response in no-cors)
-        successBox.innerHTML = "✅ Thanks! Your message sent successfully!";
-        form.reset();
+        setTimeout(function () {
+            successBox.innerHTML =
+                "✅ Thanks! Your message sent successfully!";
+            form.reset();
+        }, 1000);
     });
 
 });
