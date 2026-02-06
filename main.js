@@ -474,76 +474,36 @@ const yearText = startYear === currentYear
 
 document.getElementById("year-range").textContent = yearText;
 
-<script>
-/* ===== GOOGLE FORM SUBMISSION (STABLE VERSION) ===== */
 
-    document.addEventListener("DOMContentLoaded", function () {
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  const contactForm = document.getElementById("contactForm");
-    const formMsg = document.getElementById("formSuccess");
-
-    if (!contactForm || !formMsg) return;
-
-    contactForm.addEventListener("submit", function (e) {
-
-        e.preventDefault();
-
-    const name = document.getElementById("name");
-    const email = document.getElementById("email");
-    const phone = document.getElementById("phone");
-    const service = document.getElementById("service");
-    const budget = document.getElementById("budget");
-    const message = document.getElementById("message");
+    const form = e.target;
 
     const formData = new FormData();
 
-    // Google Form Entry IDs
-    formData.append("entry.191507138", name.value);
-    formData.append("entry.219472196", email.value);
-    formData.append("entry.1352502707", phone.value);
-    formData.append("entry.177055249", service.value);
-    formData.append("entry.1362729948", budget.value);
-    formData.append("entry.1039998442", message.value);
+    // Map your form fields to Google Form entry IDs
+    formData.append("entry.191507138", form.name.value);
+    formData.append("entry.219472196", form.email.value);
+    formData.append("entry.1352502707", form.phone.value);
+    formData.append("entry.177055249", form.service.value);
+    formData.append("entry.1362729948", form.budget.value);
+    formData.append("entry.1039998442", form.message.value);
 
-    const submitBtn = contactForm.querySelector("button");
-
-    submitBtn.disabled = true;
-    submitBtn.innerText = "Sending...";
-
-    fetch(
-    "https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse",
-    {
+    fetch("https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse", {
         method: "POST",
-    mode: "no-cors",
-    body: formData
-      }
-    ).then(() => {
+        mode: "no-cors",
+        body: formData
+    })
+        .then(() => {
+            document.getElementById("formSuccess").innerHTML =
+                "✅ Thanks! Your message sent successfully!";
 
-        // Show success
-        formMsg.innerHTML = "✅ Thank you! We will contact you soon.";
-    formMsg.style.display = "block";
-
-    contactForm.reset();
-
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
-
-      // Hide after 6 sec
-      setTimeout(() => {
-        formMsg.style.display = "none";
-      }, 6000);
-
-    }).catch(() => {
-
-        formMsg.innerHTML = "❌ Submission failed. Try again.";
-    formMsg.style.display = "block";
-
-    submitBtn.disabled = false;
-    submitBtn.innerText = "Send Message";
-
-    });
-
-  });
-
+            form.reset();
+        })
+        .catch(() => {
+            document.getElementById("formSuccess").innerHTML =
+                "❌ Submission failed. Try again.";
+        });
 });
-</script>
+
