@@ -278,7 +278,7 @@ if (contactForm && formMessage) {
 
     contactForm.addEventListener("submit", function (e) {
 
-        e.preventDefault();
+        e.preventDefault(); // stop page reload
 
         const name = document.getElementById("name");
         const email = document.getElementById("email");
@@ -288,7 +288,7 @@ if (contactForm && formMessage) {
         const message = document.getElementById("message");
 
         if (!name || !email || !phone || !service || !budget || !message) {
-            console.error("Contact form fields missing");
+            console.error("Missing form fields");
             return;
         }
 
@@ -302,10 +302,10 @@ if (contactForm && formMessage) {
         formData.append("entry.1039998442", budget.value);
         formData.append("entry.177055249", message.value);
 
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const submitBtn = contactForm.querySelector("button[type='submit']");
         if (submitBtn) submitBtn.disabled = true;
 
-        // Fire-and-forget submit
+        // Send to Google Form (same as Kanishk)
         fetch(
             "https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse",
             {
@@ -315,7 +315,7 @@ if (contactForm && formMessage) {
             }
         );
 
-        // Success UI
+        // Success message
         formMessage.textContent =
             "Thank you for your message! We will get back to you soon.";
 
