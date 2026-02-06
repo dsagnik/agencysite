@@ -474,36 +474,41 @@ const yearText = startYear === currentYear
 
 document.getElementById("year-range").textContent = yearText;
 
+// Contact Form
+document.addEventListener("DOMContentLoaded", function () {
 
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+    const form = document.getElementById("contactForm");
 
-    const form = e.target;
+    if (!form) {
+        console.error("contactForm not found!");
+        return;
+    }
 
-    const formData = new FormData();
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    // Map your form fields to Google Form entry IDs
-    formData.append("entry.191507138", form.name.value);
-    formData.append("entry.219472196", form.email.value);
-    formData.append("entry.1352502707", form.phone.value);
-    formData.append("entry.177055249", form.service.value);
-    formData.append("entry.1362729948", form.budget.value);
-    formData.append("entry.1039998442", form.message.value);
+        const formData = new FormData();
 
-    fetch("https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse", {
-        method: "POST",
-        mode: "no-cors",
-        body: formData
-    })
-        .then(() => {
-            document.getElementById("formSuccess").innerHTML =
-                "✅ Thanks! Your message sent successfully!";
+        // Map your form fields to Google Form entry IDs
+        formData.append("entry.191507138", form.name.value);
+        formData.append("entry.219472196", form.email.value);
+        formData.append("entry.1352502707", form.phone.value);
+        formData.append("entry.177055249", form.service.value);
+        formData.append("entry.1362729948", form.budget.value);
+        formData.append("entry.1039998442", form.message.value);
 
-            form.reset();
-        })
-        .catch(() => {
-            document.getElementById("formSuccess").innerHTML =
-                "❌ Submission failed. Try again.";
+        fetch("https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse", {
+            method: "POST",
+            mode: "no-cors",
+            body: formData
         });
+
+        document.getElementById("formSuccess").innerHTML =
+            "✅ Thanks! Your message sent successfully!";
+
+        form.reset();
+    });
+
 });
+
 
