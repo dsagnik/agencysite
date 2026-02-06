@@ -269,14 +269,65 @@ const yearText = startYear === currentYear
 
 document.getElementById("year-range").textContent = yearText;
 
-// Contact Form
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("contactForm");
-    const box = document.getElementById("formSuccess");
+// ===== CONTACT FORM (GOOGLE FORM SUBMISSION) =====
 
-    if (!form || !box) return;
+const contactForm = document.getElementById("contactForm");
+const formMessage = document.getElementById("formSuccess");
 
-    form.addEventListener("submit", function () {
-        box.innerHTML = "✅ Thanks! Your message has been sent!";
+if (contactForm && formMessage) {
+
+    contactForm.addEventListener("submit", function (e) {
+
+        e.preventDefault();
+
+        const name = document.getElementById("name");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const service = document.getElementById("service");
+        const budget = document.getElementById("budget");
+        const message = document.getElementById("message");
+
+        if (!name || !email || !phone || !service || !budget || !message) {
+            console.error("Contact form fields missing");
+            return;
+        }
+
+        const formData = new FormData();
+
+        // Google Form Entry IDs
+        formData.append("entry.191507138", name.value);
+        formData.append("entry.219472196", email.value);
+        formData.append("entry.1352502707", phone.value);
+        formData.append("entry.1362729948", service.value);
+        formData.append("entry.1039998442", budget.value);
+        formData.append("entry.177055249", message.value);
+
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        if (submitBtn) submitBtn.disabled = true;
+
+        // Fire-and-forget submit
+        fetch(
+            "https://docs.google.com/forms/d/e/1FAIpQLSdX-G2IF3UGObWs3XescWIT6_As8zW6SEy4jhpSHUtyc1NkDA/formResponse",
+            {
+                method: "POST",
+                mode: "no-cors",
+                body: formData
+            }
+        );
+
+        // Success UI
+        formMessage.textContent =
+            "Thank you for your message! We will get back to you soon.";
+
+        formMessage.className = "form-message success";
+        formMessage.style.display = "block";
+        formMessage.style.marginTop = "20px";
+        formMessage.style.padding = "14px 18px";
+
+        contactForm.reset();
+
+        if (submitBtn) submitBtn.disabled = false;
+
     });
-});
+
+}
