@@ -228,25 +228,43 @@
   </section>
 
   <!-- ============================================
-       NEWSLETTER
-       ============================================ -->
+     NEWSLETTER
+     ============================================ -->
+
   <section class="section">
     <div class="container">
       <div class="newsletter">
+
         <h3>Stay Updated</h3>
         <p>Subscribe to our newsletter for the latest insights, tips, and exclusive offers.</p>
 
-        <form class="newsletter-form">
-          <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
-          <button type="submit" class="btn btn-primary">Subscribe</button>
+        <form class="newsletter-form"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSejSjgRp_GBMJb2SsBiTFmQib0xDw2Ho8dgLJ6qI_vaUpiAaw/formResponse"
+          method="POST" target="hidden_iframe">
+
+          <input type="email" name="entry.663075200" class="newsletter-input" placeholder="Enter your email address"
+            required>
+
+          <button type="submit" class="btn btn-primary">
+            Subscribe
+          </button>
+
         </form>
+
+        <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+        <p id="newsletterSuccess" style="margin-top:10px;color:green;font-weight:500;display:none;">
+          ✅ Thank you for subscribing!
+        </p>
 
         <p class="mt-sm" style="font-size: 0.875rem; color: var(--color-gray-dark);">
           We respect your privacy. Unsubscribe anytime.
         </p>
+
       </div>
     </div>
   </section>
+
 
   <!-- ============================================
        CTA SECTION
