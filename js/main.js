@@ -473,3 +473,16 @@ const yearText = startYear === currentYear
     : `${startYear}–${currentYear}`;
 
 document.getElementById("year-range").textContent = yearText;
+
+<script>
+    let submitted = false;
+
+    document.querySelector("form").addEventListener("submit", function () {
+        submitted = true;
+
+    setTimeout(() => {
+        alert("Thank you! Your message has been sent.");
+    this.reset();
+    }, 1000);
+  });
+</script>
