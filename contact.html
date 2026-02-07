@@ -198,6 +198,7 @@
                             <div class="form-group">
                                 <label for="service" class="form-label">Service Interested In *</label>
                                 <select id="service" name="entry.145772532" class="form-select" required>
+                                    <option value="">Select a service</option>
                                     <option>Branding & Identity</option>
                                     <option>Web Development</option>
                                     <option>Digital Marketing</option>
@@ -212,6 +213,7 @@
                             <div class="form-group">
                                 <label for="budget" class="form-label">Budget Range *</label>
                                 <select id="budget" name="entry.1549220321" class="form-select" required>
+                                    <option value="">Select budget range</option>
                                     <option>Under ₹25,000</option>
                                     <option>₹25,000 - ₹50,000</option>
                                     <option>₹50,000 - ₹1,00,000</option>
@@ -237,8 +239,7 @@
                             </p>
                         </form>
                         <iframe name="hidden_iframe" style="display:none;"></iframe>
-                        <p id="contactSuccess" style="margin-top:10px;color:green;font-weight:500;display:none;">
-                        </p>
+                        <div id="contactSuccess" class="contact-success-box" style="display:none;"></div>
                     </div>
                 </div>
 

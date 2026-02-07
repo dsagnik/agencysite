@@ -306,10 +306,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("submit", function () {
 
+        // Show success message
         setTimeout(function () {
+
             msg.style.display = "block";
-            msg.innerText = "✅ Thank you! We will contact you soon.";
+            msg.innerHTML = "✅ Thank you! We will contact you soon.";
             form.reset();
+
+            // Hide after 5 seconds
+            setTimeout(function () {
+                msg.style.display = "none";
+            }, 5000);
+
         }, 800);
 
     });
