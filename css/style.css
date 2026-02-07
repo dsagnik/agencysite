@@ -2357,10 +2357,18 @@ p {
 
 }
 
+.newsletter .contact-success-box {
+  margin-top: 10px;
+}
+
+#newsletterSuccess {
+  display: none;
+}
+
 /* Contact Form Success Box */
 
 .contact-success-box {
-  margin: 20px auto 0;
+  margin: 10px auto 0;
   padding: 16px 20px;
 
   max-width: 90%;

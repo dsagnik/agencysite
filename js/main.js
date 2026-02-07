@@ -282,16 +282,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("submit", function () {
 
-        // Show success after Google Form submits
         setTimeout(function () {
-            msg.style.display = "block";
-            msg.innerText = "✅ Thank you for subscribing!";
+
+            msg.innerHTML = "✅ Thank you for subscribing!";
+            msg.style.display = "flex"; // center align like contact box
+
             form.reset();
+
         }, 800);
+
+        // Auto hide after 5 sec
+        setTimeout(() => {
+            msg.style.display = "none";
+        }, 5000);
 
     });
 
 });
+
 
 // ===============================
 // CONTACT FORM SUCCESS MESSAGE
