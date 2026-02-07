@@ -293,18 +293,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-// ===== CONTACT FORM CONFIRMATION =====
-
-let contactSubmitted = false;
+// ===============================
+// CONTACT FORM SUCCESS MESSAGE
+// ===============================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const success = document.getElementById("contactSuccess");
+    const form = document.querySelector(".contact-form");
+    const msg = document.getElementById("contactSuccess");
 
-    window.addEventListener("load", function () {
-        if (contactSubmitted) {
-            success.style.display = "block";
-        }
+    if (!form || !msg) return;
+
+    form.addEventListener("submit", function () {
+
+        setTimeout(function () {
+            msg.style.display = "block";
+            msg.innerText = "✅ Thank you! We will contact you soon.";
+            form.reset();
+        }, 800);
+
     });
 
 });

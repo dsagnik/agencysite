@@ -174,9 +174,9 @@
                         <h3 class="mb-md">Send Us a Message</h3>
                         <p class="mb-lg">Fill out the form below and we'll get back to you within 24 hours.</p>
 
-                        <form id="contactForm"
+                        <form id="contactForm" class="contact-form"
                             action="https://docs.google.com/forms/d/e/1FAIpQLSe2xuc9JV1UIJBXKFolCMWsMuf6vrhbtF_uXxbbV1c1MhDJ4Q/formResponse"
-                            method="POST" target="hidden_iframe" onsubmit="contactSubmitted=true;">
+                            method="POST" target="hidden_iframe">
                             <div class="form-group">
                                 <label for="name" class="form-label">Full Name *</label>
                                 <input type="text" id="name" name="entry.1258596235" class="form-input"
@@ -240,9 +240,7 @@
                             <div id="formSuccess" style="margin-top:10px;text-align:center;font-weight:500;"></div>
                         </form>
                         <iframe name="hidden_iframe" style="display:none;"></iframe>
-
-                        <p id="contactSuccess" style="display:none;color:green;margin-top:15px;">
-                            ✅ Thank you! We’ll contact you soon.
+                        <p id="contactSuccess" style="margin-top:10px;color:green;font-weight:500;display:none;">
                         </p>
                     </div>
                 </div>
