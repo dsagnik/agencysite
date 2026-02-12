@@ -2595,4 +2595,20 @@ p {
   }
 }
 
-</style>
+/* Make pricing cards vertical layouts */
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Push button to bottom */
+.pricing-card .btn {
+  margin-top: auto;
+}
+
+/* Lift button in featured pricing card */
+.pricing-card.featured .btn {
+  margin-top: auto;
+  transform: translateY(-30px);
+}
